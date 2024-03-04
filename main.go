@@ -195,6 +195,36 @@ func main() {
 	wg.Wait()
 	fmt.Println("Excecution time: ", time.Since(t0))
 	fmt.Println("Results: ", results)
+
+	// generic function
+	var sliceA = []int64{8, 4, 6}
+	var sumA = sumSlice[int64](sliceA)
+	fmt.Println(sumA)
+
+	fmt.Println(isEmpty(sliceA))
+
+	// generic struct
+	var petrolCar = car[petrolEngine]{
+		ownerName: "Ian N",
+		age:       12,
+		engine: petrolEngine{
+			capacity: 1235,
+			fuel:     "petrol",
+		},
+	}
+
+	var elecCar = car[electricEngine]{
+		ownerName: "Ian N",
+		age:       12,
+		engine: electricEngine{
+			rangeInKms: 1235,
+			kWh:        156,
+		},
+	}
+
+	fmt.Println("Petrol Car: ", petrolCar)
+	fmt.Println("Electric Car: ", elecCar)
+
 }
 
 func print(print string) {
@@ -232,4 +262,35 @@ func someFunction(i int) {
 	results = append(results, fmt.Sprint(i))
 	mut.RUnlock()
 	wg.Done()
+}
+
+// generics
+// generic func
+func sumSlice[T int | float32 | int64 | int32 | int16 | float64](slice []T) T {
+	var sum T
+	for _, i := range slice {
+		sum += i
+	}
+	return sum
+}
+
+func isEmpty[T any](slice []T) bool {
+	return len(slice) == 0
+}
+
+// generic struct
+type petrolEngine struct {
+	capacity int
+	fuel     string
+}
+
+type electricEngine struct {
+	rangeInKms int
+	kWh        int
+}
+
+type car[T petrolEngine | electricEngine] struct {
+	age       int
+	ownerName string
+	engine    T
 }
