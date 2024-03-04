@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"unicode/utf8"
 )
@@ -47,4 +48,49 @@ func main() {
 	var myRune rune = 'u'
 
 	fmt.Println("Rune: ", myRune)
+
+	runeShort := 'e'
+
+	fmt.Println(runeShort)
+
+	var myBoolean bool = true
+
+	fmt.Println("Boolean: ", myBoolean)
+
+	var someType = "jrklg"
+
+	fmt.Println(someType)
+
+	var1, var2, var3 := "jhjj", "jkd", 3
+
+	fmt.Println(var1, var2, var3)
+
+	const myConst string = "Something!!"
+
+	print(myConst)
+
+	print(fmt.Sprint(intDivision(2, 3)))
+
+	result, remainder, error := intDivision(3, 8)
+
+	if error != nil {
+		print("Error encountered!")
+	} else if remainder == 0 {
+		print("Perfect division")
+	}
+
+	fmt.Printf("Dividing %v by %v, result is %v and remainder is %v", 8, 3, result, remainder)
+}
+
+func print(print string) {
+	fmt.Println(print)
+}
+
+func intDivision(denom int, numer int) (int, int, error) {
+
+	if denom == 0 {
+		var error error = errors.New("division by zero")
+		return 0, 0, error
+	}
+	return numer / denom, numer % denom, nil
 }
