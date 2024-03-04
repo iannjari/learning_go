@@ -79,7 +79,40 @@ func main() {
 		print("Perfect division")
 	}
 
-	fmt.Printf("Dividing %v by %v, result is %v and remainder is %v", 8, 3, result, remainder)
+	fmt.Printf("Dividing %v by %v, result is %v and remainder is %v \n", 8, 3, result, remainder)
+
+	// arrays
+	var intArr [3]int
+
+	intArr[0] = 3
+	intArr[2] = 5356
+	intArr[1] = 7777
+
+	fmt.Println(intArr[0])
+	fmt.Println(intArr[1:3])
+
+	fmt.Println(&intArr[0])
+
+	var strArr [3]string = [3]string{"akd", "hjik", "jdjmkf"}
+
+	fmt.Println(strArr)
+
+	strArr2 := [...]string{"akd", "hjik", "jdjmkf"}
+
+	fmt.Println(strArr2)
+
+	// slices
+	mySlice := []string{"f", "rt", "f"}
+
+	fmt.Printf("The length of mySlice before update is %v and capacity is %v \n", len(mySlice), cap(mySlice))
+
+	mySlice = append(mySlice, "wdv")
+
+	fmt.Printf("The length of mySlice before update is %v and capacity is %v \n", len(mySlice), cap(mySlice))
+
+	mySlice = append(mySlice, mySlice...)
+
+	fmt.Println(mySlice)
 }
 
 func print(print string) {
