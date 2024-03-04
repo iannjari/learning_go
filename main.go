@@ -3,8 +3,14 @@ package main
 import (
 	"errors"
 	"fmt"
+	"sync"
+	"time"
 	"unicode/utf8"
 )
+
+var wg = sync.WaitGroup{}
+var results = []string{}
+var mut = sync.RWMutex{}
 
 func main() {
 
@@ -179,6 +185,16 @@ func main() {
 	fmt.Println(engine2)
 
 	print(engine.nameAndCC())
+
+	// goroutines
+	t0 := time.Now()
+	for i := 0; i < 4; i++ {
+		wg.Add(1)
+		go someFunction(i)
+	}
+	wg.Wait()
+	fmt.Println("Excecution time: ", time.Since(t0))
+	fmt.Println("Results: ", results)
 }
 
 func print(print string) {
@@ -206,4 +222,14 @@ func (g gasEngine) nameAndCC() string {
 
 type owner struct {
 	name string
+}
+
+func someFunction(i int) {
+	var t int = i * 1000
+	time.Sleep(time.Duration(t))
+	fmt.Println("Finished Routine A...when i= ", i)
+	mut.RLock()
+	results = append(results, fmt.Sprint(i))
+	mut.RUnlock()
+	wg.Done()
 }
