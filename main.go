@@ -113,6 +113,48 @@ func main() {
 	mySlice = append(mySlice, mySlice...)
 
 	fmt.Println(mySlice)
+
+	// maps
+	var myMap map[string]string = make(map[string]string)
+	fmt.Println(myMap)
+
+	var map2 = map[string]string{"A": "B", "C": "D"}
+	fmt.Println(map2)
+	fmt.Println(map2["A"])
+	fmt.Println(map2["YS"])
+
+	var value, containsKey = map2["weck"]
+
+	fmt.Printf("Value: %v, containsKey? %v \n", value, containsKey)
+
+	delete(map2, "C")
+
+	fmt.Println(map2)
+
+	/// loops
+	// for
+	for item := range intArr {
+		fmt.Println(item)
+	}
+
+	// while
+	// impl 1
+	var i int = 0
+	for i < 10 {
+		fmt.Println("Loop in i= ", i)
+		i++
+	}
+
+	// impl 2
+	var g int = 0
+	for {
+		if g >= 12 {
+			break
+		}
+		fmt.Println("Loop in g= ", g)
+		g++
+	}
+
 }
 
 func print(print string) {
