@@ -155,6 +155,30 @@ func main() {
 		g++
 	}
 
+	// impl 3
+	for i := 0; i <= 12; i++ {
+		fmt.Println("Loop in i= ", i)
+	}
+
+	// structs
+	var engine gasEngine = gasEngine{"hbjd", 200, owner{"hjk"}}
+	fmt.Println(engine)
+
+	engine.capacity = 300
+	engine.owner.name = "Ian N."
+	fmt.Println(engine.capacity)
+	fmt.Println(engine)
+	fmt.Println(engine.name)
+
+	// anonymous structs
+	var engine2 = struct {
+		mpg  int16
+		name string
+	}{2, "RTX 456"}
+
+	fmt.Println(engine2)
+
+	print(engine.nameAndCC())
 }
 
 func print(print string) {
@@ -168,4 +192,18 @@ func intDivision(denom int, numer int) (int, int, error) {
 		return 0, 0, error
 	}
 	return numer / denom, numer % denom, nil
+}
+
+type gasEngine struct {
+	variant  string
+	capacity int16
+	owner
+}
+
+func (g gasEngine) nameAndCC() string {
+	return g.variant + " - " + fmt.Sprint(g.capacity) + " cc"
+}
+
+type owner struct {
+	name string
 }
